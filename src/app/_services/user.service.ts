@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
 import * as firebase from 'firebase';
+import { AppUser } from '../_models/app-user';
 
 @Injectable({
   providedIn: 'root'
@@ -15,4 +16,9 @@ constructor(private db: AngularFireDatabase ) { }
        email: user.email
     });
   }
+
+  get(uid: string): FirebaseObjectObservable<AppUser> {
+    return this.db.object('/users/' + uid);
+  }
+
 }
